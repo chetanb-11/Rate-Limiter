@@ -20,8 +20,8 @@ A simple Express-based rate limiter that uses Redis to track request counts with
 
 ## Project structure
 
-- `/home/runner/work/Rate-Limiter/Rate-Limiter/index.js` — Express app and rate-limit middleware
-- `/home/runner/work/Rate-Limiter/Rate-Limiter/redis.js` — Redis client connection setup
+- `./index.js` — Express app and rate-limit middleware
+- `./redis.js` — Redis client connection setup
 
 ## How rate limiting works
 
