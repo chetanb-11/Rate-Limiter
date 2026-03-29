@@ -1,11 +1,12 @@
+require('dotenv').config();
 const redis = require('redis');
 
 const client = redis.createClient({
-    username: 'default',
-    password: 'UkRhX0P8i5tEosDbSFfnL6ANnkM5YogN',
+    username: process.env.REDIS_USERNAME,
+    password: process.env.REDIS_PASSWORD,
     socket: {
-        host: 'redis-19335.crce219.us-east-1-4.ec2.cloud.redislabs.com',
-        port: 19335
+        host: process.env.REDIS_HOST,
+        port: process.env.REDIS_PORT
     }
 });
 
