@@ -36,5 +36,5 @@ Make sure you have Node.js and npm installed on your machine. You will also need
 
 1. Clone the repository:
    ```bash
-   git clone <your-repo-url>
+   git clone https://github.com/chetanb-11/Rate-Limiter.git
    cd Rate-Limiter
