@@ -4,6 +4,8 @@ const proxyMiddleware = require('./middleware/proxyMiddleware');
 
 const app = express();
 
+app.set('trust proxy', 1); // trust the first proxy hop
+
 app.use('/api/secure', rateLimiter({maxReq: 3, timeWindow: 10}));
 app.use('/api/public', rateLimiter({maxReq: 10, timeWindow: 10}));
 
