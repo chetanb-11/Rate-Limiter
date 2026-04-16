@@ -26,9 +26,7 @@ function rateLimiter({ maxReq, timeWindow }) {
                 'X-RateLimit-Remaining': String(Math.max(0, maxReq - requestCount)),
                 'X-RateLimit-Reset': String(timeWindow),
             });
-            // console.log(maxReq);
             console.log(`recieved request no ${requestCount} from ${key}`);
-            // logger.info({ requestCount, key, ip: req.ip }, 'rate limit check');
 
             if (requestCount > maxReq) {
                 console.log(`You have exceeded the ${maxReq} requests in ${timeWindow} seconds limit.`);
@@ -38,15 +36,9 @@ function rateLimiter({ maxReq, timeWindow }) {
                 });
             }
             
-            
-            // if(ip_mapping[my_ip] > MAX_ALLOWED_REQ){
-                //     console.error("bss kar aur request mat bhaij");
-                //     res.status(429).send("Too many requests");
-                // }
                 next();
             } catch (err) {
                 console.error("Rate limiter error:", err);
-                // logger.error({ err, ip: req.ip }, 'rate limiter failed');
             next() // fail open
         }
     }
