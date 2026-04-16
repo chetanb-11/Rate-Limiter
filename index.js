@@ -6,8 +6,11 @@ const app = express();
 
 app.set('trust proxy', 1); // trust the first proxy hop
 
-app.use('/api/secure', rateLimiter({maxReq: 3, timeWindow: 10}));
-app.use('/api/public', rateLimiter({maxReq: 10, timeWindow: 10}));
+// Login, signup, sensitive operations — strict
+app.use('/api/secure', rateLimiter({maxReq: 10, timeWindow: 60}));
+
+// General API usage — generous
+app.use('/api/public', rateLimiter({maxReq: 100, timeWindow: 60}));
 
 const proxy = proxyMiddleware();
 app.use("/api/secure", proxy)
