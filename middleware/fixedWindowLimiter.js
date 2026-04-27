@@ -1,4 +1,4 @@
-import client from "../config/redisClient";
+import client from "../config/redisClient.js";
 
 export default function rateLimiter({ maxReq, timeWindow }) {
     if (!Number.isInteger(maxReq) || maxReq < 1) throw new Error("maxReq must be positive integer");

@@ -1,4 +1,4 @@
-import client from "../config/redisClient";
+import client from "../config/redisClient.js";
 
 export default async function rateStats(req, res) {
     try {
