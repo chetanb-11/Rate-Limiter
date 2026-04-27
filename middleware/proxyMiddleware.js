@@ -8,11 +8,11 @@ function proxyMiddleware() {
             '^/api/secure': '',
             '^/api/public': '',
         },
-        on: {
-            proxyRes: function (proxyRes, req, res) {
-                // console.log(`Successfully proxied request from ${ip.address()}`);
-            }
-        },
+        // on: {
+        //     proxyRes: function (proxyRes, req, res) {
+        //         // console.log(`Successfully proxied request from ${ip.address()}`);
+        //     }
+        // },
     })
 }
 
