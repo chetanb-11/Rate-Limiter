@@ -163,7 +163,3 @@ Retry-After: 60
   "retryAfter": 60
 }
 ```
-
-## 📄 License
-
-This project is licensed under the ISC License.
