@@ -1,12 +1,12 @@
-const client = require('../redis.js');
+import client from "../config/redisClient";
 
-async function rateStats(req, res) {
+export default async function rateStats(req, res) {
     try {
         const stats = [];
 
         for await (const keys of client.scanIterator({ MATCH: 'rate_limit:*' })) {
             const keyList = Array.isArray(keys) ? keys : [keys];
-            
+
             for (const key of keyList) {
                 const count = await client.get(key);
                 const ttl = await client.ttl(key);
@@ -26,5 +26,3 @@ async function rateStats(req, res) {
         res.status(500).json({ error: 'Failed to fetch stats' });
     }
 }
-
-module.exports = rateStats;

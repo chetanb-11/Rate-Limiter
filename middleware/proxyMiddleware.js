@@ -1,6 +1,6 @@
-const { createProxyMiddleware } = require('http-proxy-middleware');
+import { createProxyMiddleware } from 'http-proxy-middleware';
 
-function proxyMiddleware() {
+export default function proxyMiddleware() {
     return createProxyMiddleware({
         target: 'https://jsonplaceholder.typicode.com',
         changeOrigin: true,
@@ -15,5 +15,3 @@ function proxyMiddleware() {
         // },
     })
 }
-
-module.exports = proxyMiddleware;

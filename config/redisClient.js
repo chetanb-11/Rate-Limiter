@@ -1,5 +1,5 @@
-require('dotenv').config();
-const redis = require('redis');
+import 'dotenv/config';
+import redis from 'redis';
 
 const client = redis.createClient({
     username: process.env.REDIS_USERNAME,
@@ -24,4 +24,4 @@ client.on('error', err => console.log('Redis Client Error', err));
     }
 })();
 
-module.exports = client;
+export default client;

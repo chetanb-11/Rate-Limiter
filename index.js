@@ -1,8 +1,8 @@
-const express = require('express');
-const cors = require('cors');
-const rateLimiter = require('./middleware/rateLimiter');
-const proxyMiddleware = require('./middleware/proxyMiddleware');
-const rateStats = require('./middleware/ratestats');
+import express from 'express';
+import cors from 'cors';
+import rateLimiter from './middleware/rateLimiter.js';
+import proxyMiddleware from './middleware/proxyMiddleware.js';
+import rateStats from './middleware/ratestats.js';
 
 const app = express();
 
