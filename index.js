@@ -2,7 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import rateLimiter from './middleware/fixedWindowLimiter.js';
 import proxyMiddleware from './middleware/proxyMiddleware.js';
-import rateStats from './middleware/ratestats.js';
+import rateStats from './middleware/rateStats.js';
 import createRateLimiter from './middleware/createRateLimiter.js';
 
 const app = express();

@@ -8,7 +8,7 @@ export default function rateLimiter({ maxReq, timeWindow }) {
         try {
             const my_ip = req.ip;
             // increment out ip request
-            const key = `rate_limit:${req.baseUrl}:${my_ip}`;
+            const key = `rate_limit|fixed|${req.baseUrl}|${my_ip}`;
             const requestCount = await client.incr(key); // ip_mapping[my_ip] = ip_mapping[my_ip] + 1 || 1;
 
             if (requestCount === 1) {

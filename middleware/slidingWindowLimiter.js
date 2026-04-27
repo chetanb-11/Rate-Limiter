@@ -7,7 +7,7 @@ export default function slidingWindowLimiter({ maxReq, timeWindow }) {
     return async (req, res, next) => {
         const my_ip = req.ip;
         const now = Date.now();
-        const key = `rate_limiting:sliding${my_ip}`;
+        const key = `rate_limit|sliding|${req.baseUrl}|${my_ip}`;
         const windowStart = now - timeWindow * 1000;
 
         try {
