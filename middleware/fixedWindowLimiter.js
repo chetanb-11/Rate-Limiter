@@ -12,7 +12,7 @@ export default function rateLimiter({ maxReq, timeWindow }) {
             const requestCount = await client.incr(key); // ip_mapping[my_ip] = ip_mapping[my_ip] + 1 || 1;
 
             if (requestCount === 1) {
-                console.log("clearing mapping");
+                console.log(`[FixedWindow] NEW WINDOW ${key} | TTL: ${timeWindow}s`);
                 await client.expire(key, timeWindow);
             }
 
@@ -22,10 +22,10 @@ export default function rateLimiter({ maxReq, timeWindow }) {
                 'X-RateLimit-Remaining': String(Math.max(0, maxReq - requestCount)),
                 'X-RateLimit-Reset': String(timeWindow),
             });
-            console.log(`recieved request no ${requestCount} from ${key}`);
+            console.log(`[FixedWindow] ${key} | active: ${requestCount} | remaining: ${Math.max(0, maxReq - requestCount)}`);
 
             if (requestCount > maxReq) {
-                console.log(`You have exceeded the ${maxReq} requests in ${timeWindow} seconds limit.`);
+                console.log(`[FixedWindow] BLOCKED ${my_ip} | ${requestCount}/${maxReq} requests in ${timeWindow}s window`);
                 return res.status(429).json({
                     error: "too many request",
                     message: `You have exceeded the ${maxReq} requests in ${timeWindow} seconds limit.`
