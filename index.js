@@ -4,6 +4,7 @@ import rateLimiter from './middleware/fixedWindowLimiter.js';
 import proxyMiddleware from './middleware/proxyMiddleware.js';
 import rateStats from './middleware/rateStats.js';
 import createRateLimiter from './middleware/createRateLimiter.js';
+import { connectPromise } from './config/redisClient.js';
 
 const app = express();
 
@@ -26,4 +27,11 @@ const proxy = proxyMiddleware();
 app.use("/api/secure", proxy)
 app.use("/api/public", proxy)
 
-app.listen(3000, () => console.log("app running on localhost:3000"));
+// Wait for Redis to connect before starting the server
+connectPromise.then(() => {
+    app.listen(3000, () => console.log("app running on localhost:3000"));
+}).catch((err) => {
+    console.error("Failed to start server, Redis connection error:", err);
+    // Start anyway (fail-open) since middleware already handles Redis errors
+    app.listen(3000, () => console.log("app running on localhost:3000 (Redis unavailable)"));
+});
